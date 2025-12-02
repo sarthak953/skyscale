@@ -23,7 +23,6 @@ export async function GET(req: Request, { params }: { params: Promise<{ sku: str
         },
         product_specifications: {
           select: { spec_key: true, spec_value: true },
-          orderBy: { sort_order: 'asc' },
         },
       },
     });
