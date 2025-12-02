@@ -8,7 +8,12 @@ import OrderConfirmation from '@/components/checkout/OrderConfirmation';
 
 export default function CheckoutPage() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [orderData, setOrderData] = useState({
+  const [orderData, setOrderData] = useState<{
+    address: any;
+    paymentMethod: string | null;
+    orderId: string | null;
+    orderDetails: any;
+  }>({
     address: null,
     paymentMethod: null,
     orderId: null,
@@ -44,9 +49,11 @@ export default function CheckoutPage() {
         </div>
         
         <div className={`transition-opacity duration-300 ${currentStep === 3 ? 'opacity-100' : 'opacity-0 hidden'}`}>
-          <OrderConfirmation 
-            orderData={orderData}
-          />
+          {orderData.orderId && orderData.paymentMethod && (
+            <OrderConfirmation 
+              orderData={orderData as { orderId: string; paymentMethod: string; address: any; orderDetails: any; }}
+            />
+          )}
         </div>
       </div>
     </div>
